@@ -120,7 +120,7 @@ class TaskTest extends TestCase
 
         $task = Task::factory()->create();
 
-        $response = $this->deleteJson("api/tasks/{$task->id}");
+        $response = $this->deleteJson("api/tasks/delete/{$task->id}");
 
         $response
             ->assertOk()
