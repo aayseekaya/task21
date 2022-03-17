@@ -18,11 +18,11 @@ class TaskTest extends TestCase
         $user = User::factory()->create();
 
         Passport::actingAs($user);
-
+      
         $attributes = Task::factory()->raw();
 
         $response = $this->postJson('api/tasks', $attributes);
-
+       
         $response
             ->assertCreated()
             ->assertJsonStructure([
@@ -120,7 +120,7 @@ class TaskTest extends TestCase
 
         $task = Task::factory()->create();
 
-        $response = $this->deleteJson("api/tasks/delete/{$task->id}");
+        $response = $this->deleteJson("api/tasks/{$task->id}");
 
         $response
             ->assertOk()

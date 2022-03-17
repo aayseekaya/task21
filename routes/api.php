@@ -20,6 +20,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get("/tasks/{id}", "App\Http\Controllers\Api\TaskController@show");
     Route::post("/tasks", "App\Http\Controllers\Api\TaskController@store");
 
-    Route::post("/tasks/{id}", "App\Http\Controllers\Api\TaskController@update");
-    Route::post("/tasks/delete/{id}", "App\Http\Controllers\Api\TaskController@delete");
+    Route::patch("/tasks/{id}", "App\Http\Controllers\Api\TaskController@update");
+    Route::delete("/tasks/{id}", "App\Http\Controllers\Api\TaskController@delete");
 });

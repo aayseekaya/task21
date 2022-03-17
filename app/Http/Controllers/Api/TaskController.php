@@ -23,7 +23,10 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::get();
-        return $tasks;
+        $array = json_decode($tasks, true);
+        return response()->json([
+            'data' => $array 
+        ]);
     }
 
     /**
@@ -38,15 +41,18 @@ class TaskController extends Controller
             $request->validate([
                 'title'       => 'required',
             ]);
-            $data = Task::create([
+            $arr = Task::create([
                 "title" => $request->title,
                 "description" => $request->description,
                 'status'=> $request->status,
                 'user_id'=> $request->user_id,
             ]);
-            return response()->json([
-                'data' => $data
-            ]);
+            $array = json_decode($arr, true);
+
+                return response()->json([
+                    'data' => $array 
+                ])->setStatusCode(201);
+           
          }
         catch (ValidationException $exception) {
             return response()->json([
@@ -94,10 +100,11 @@ class TaskController extends Controller
     {
         $article = Task::find($id);
         $article->update($request->all());
+        $array = json_decode($article, true);
 
         return response()->json([
-            'data' => $article
-        ]);
+            'data' => $array 
+        ])->setStatusCode(200);
     }
 
     /**
@@ -108,13 +115,18 @@ class TaskController extends Controller
      */
     public function delete(int $id)
     {
+ 
         $todo = Task::find($id)->first();
 
         if(!is_null($todo)) {
             $todo->delete();
         }
 
-        return 200;
+        $array = json_decode($todo, true);
+
+        return response()->json([
+            'data' => $array 
+        ])->setStatusCode(200);
     }
 
 

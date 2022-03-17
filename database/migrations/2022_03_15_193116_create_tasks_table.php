@@ -18,7 +18,7 @@ class CreateTasksTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('title');
             $table->enum('status', ['TODO', 'DOING','DONE']);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
